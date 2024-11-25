@@ -68,7 +68,7 @@
             return content
                 .split('\n')
                 .filter(line => !line.match(/^\d+$|^(\d{2}:){2}\d{2}[.,]\d{3}/))
-                .join('\n')
+                .join(' ')
                 .trim();
         }
     </script>
