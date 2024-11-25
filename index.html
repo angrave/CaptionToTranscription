@@ -141,16 +141,21 @@ function extractTranscription(content) {
     };
 
     // Group captions into paragraphs
-    const groupCaptions = (lines, maxLength = 200) => {
+    const groupCaptions = (lines, maxLength = 1000) => {
         const paragraphs = [];
         let currentParagraph = "";
 
         lines.forEach((line) => {
             // Check if the line starts with a speaker indicator or is too long
             const isNewSpeaker = line.startsWith("- ") || /^[A-Z][a-z]+:/.test(line); // e.g., "- " or "Speaker:"
-
+            if (isNewSpeaker) {
+                line = line.replace(/^-\s+/, "")           // Remove leading "- "
+                .replace(/^[A-Z][a-z]+:\s*/, ""); // Remove "Speaker:" prefixes
+            }
+            const endSentence = /[.!?]$/.test(line);
+            const prefMaxLength = endSentence ? maxLength : maxLength *1.5;
             // If it's a new speaker or the current paragraph is too long, start a new paragraph
-            if (isNewSpeaker || currentParagraph.length + line.length > maxLength) {
+            if (isNewSpeaker || currentParagraph.length + line.length > prefMaxLength) {
                 if (currentParagraph.trim()) {
                     paragraphs.push(currentParagraph.trim());
                 }
