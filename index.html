@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VTT/SRT to Transcription (Version 1.0)</title>
+    <title>VTT/SRT to Transcription (Version 1.001)</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -117,13 +117,15 @@
             });
             fileInput.click();
         });
-        inputBox.addEventListener('input', () => {
+        inputBox.addEventListener('input', processInput);
+
+        function processInput() {
             const transcription = extractTranscription(inputBox.value);
             outputArea.innerText = transcription;
             copyButton.disabled = !transcription.trim();
             copyButton.setAttribute('aria-disabled', copyButton.disabled.toString());
-        });
-
+        }
+        
         copyButton.addEventListener('click', () => {
             navigator.clipboard.writeText(outputArea.innerText)
                 .then(() => alert('Transcription copied to clipboard!'))
