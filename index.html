@@ -49,20 +49,20 @@
         The original version is published at <a href='https://angrave.github.io/CaptionToTranscription/'>angrave.github.io/CaptionToTranscription</a> without advertising and caption text is processed within your browser. </p>
     
     <form aria-labelledby="form-description">
-        <p id="form-description">Paste or type your VTT or SRT file content, or drag and drop a file below.</p>
+        <p id="form-description">Drag and drop a file below or paste the content</p>
         
         <div id="drop-zone" class="drop-zone" aria-label="File drop zone" tabindex="0">
-            Drag and drop your VTT or SRT file here, or click to select.
+            Drag and drop your VTT or SRT file here, or click to select a file.
         </div>
-        <label for="input-box">Input Box (VTT/SRT content)</label>
-        <textarea id="input-box" aria-describedby="input-box-help" placeholder="Paste your VTT or SRT file content here"></textarea>
-        <p id="input-box-help">Ensure you have pasted valid VTT or SRT content.</p>
-
-        <label for="output-area">Transcription:</label>
-        <output id="output-area" aria-live="polite"></output>
-        
-        <button id="copy-button" type="button" aria-disabled="true" disabled>Copy to Clipboard</button>
+        <label for="input-box">VTT/SRT content</label>
+        <textarea id="input-box" placeholder="Paste your VTT or SRT file content here"></textarea>
     </form>
+   <div>
+       <label for="output-area">Transcription:</label>
+        <button id="copy-button" type="button" aria-disabled="true" disabled>Copy transcription to clipboard</button>
+        <output id="output-area" aria-live="polite"></output>
+    </div>
+   
    <br>
     <p>Source code and license information is available at <a href='https://github.com/angrave/CaptionToTranscription/'>github.com/angrave/CaptionToTranscription</a> </p>
 
