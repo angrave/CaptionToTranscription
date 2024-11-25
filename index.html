@@ -34,8 +34,9 @@
 </head>
 <body>
     <h1>Convert VTT/SRT caption to transcription</h1>
-    <p>This accessibility tool converts the content of vtt and srt caption files into a readable transcription. 
-        The original version is published at <a href='https://angrave.github.io/CaptionToTranscription/'> without advertising and caption text is processed within your browser. </p>
+    <noscript><p>This tool requires JavaScript to function.</p></noscript>
+    <p>This tool converts the content of vtt and srt caption files into a readable transcription. 
+        The original version is published at <a href='https://angrave.github.io/CaptionToTranscription/'>angrave.github.io/CaptionToTranscription</a> without advertising and caption text is processed within your browser. </p>
     
     <form aria-labelledby="form-description">
         <p id="form-description">Paste or type your VTT or SRT file content into the input box below. The transcription paragraphs will appear in the output area.</p>
@@ -44,11 +45,13 @@
         <textarea id="input-box" aria-describedby="input-box-help" placeholder="Paste your VTT or SRT file content here"></textarea>
         <p id="input-box-help">Ensure you have pasted valid VTT or SRT content.</p>
 
-        <label for="output-area">Output Area (Transcription)</label>
+        <label for="output-area">Transcription:</label>
         <output id="output-area" aria-live="polite"></output>
         
         <button id="copy-button" type="button" aria-disabled="true" disabled>Copy to Clipboard</button>
     </form>
+   <br>
+    <p>Source code and license information is available at <a href='https://github.com/angrave/CaptionToTranscription/'>github.com/angrave/CaptionToTranscription</a> </p>
 
     <script>
         const inputBox = document.getElementById('input-box');
