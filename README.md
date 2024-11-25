@@ -1,10 +1,18 @@
-# CaptionToTranscription
+# Caption To Transcription
 
-An accessibility tool to convert SRT and VTT files to plain text transcription using javascript (nothing is sent to a server)
+An privacy-preserving accessibility tool to convert SRT and VTT files to a plain text transcription. The tool is available here-
 
 https://angrave.github.io/CaptionToTranscription/
 
-An example srt file
+## Features
+* Privacy-preserving; no caption data is sent or stored on a server.
+* ARIA and screen-reader support.
+* Speaker changes ("Speaker:") and Speaker change ("- ") cause paragraph breaks
+* HTML Entity support (e.g. &gt; &amp;)
+* Support for multiline cues vtt and srt
+* Extended paraphraph lengths if the caption does not finish a sentence.
+
+# Example input
 ```txt
 1
 00:02:00,400 --> 00:04:15,300
