@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VTT/SRT to Transcription</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        label, textarea, output, button {
+            display: block;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+        textarea, output {
+            height: 150px;
+        }
+        button {
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <h1>Convert VTT/SRT caption to transcription</h1>
+    <form aria-labelledby="form-description">
+        <p id="form-description">Paste or type your VTT or SRT file content into the input box below. The transcription will appear in the output area.</p>
+        
+        <label for="input-box">Input Box (VTT/SRT content)</label>
+        <textarea id="input-box" aria-describedby="input-box-help" placeholder="Paste your VTT or SRT file content here"></textarea>
+        <p id="input-box-help">Ensure you have pasted valid VTT or SRT content.</p>
+
+        <label for="output-area">Output Area (Transcription)</label>
+        <output id="output-area" aria-live="polite"></output>
+        
+        <button id="copy-button" type="button" aria-disabled="true" disabled>Copy to Clipboard</button>
+    </form>
+
+    <script>
+        const inputBox = document.getElementById('input-box');
+        const outputArea = document.getElementById('output-area');
+        const copyButton = document.getElementById('copy-button');
+
+        inputBox.addEventListener('input', () => {
+            const transcription = extractTranscription(inputBox.value);
+            outputArea.innerText = transcription;
+            copyButton.disabled = !transcription.trim();
+            copyButton.setAttribute('aria-disabled', copyButton.disabled.toString());
+        });
+
+        copyButton.addEventListener('click', () => {
+            navigator.clipboard.writeText(outputArea.innerText)
+                .then(() => alert('Transcription copied to clipboard!'))
+                .catch(err => alert('Failed to copy text: ' + err));
+        });
+
+        function extractTranscription(content) {
+            return content
+                .split('\n')
+                .filter(line => !line.match(/^\d+$|^(\d{2}:){2}\d{2}[.,]\d{3}/))
+                .join('\n')
+                .trim();
+        }
+    </script>
+</body>
+</html>
