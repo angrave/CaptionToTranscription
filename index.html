@@ -30,6 +30,16 @@
             background-color: #ccc;
             cursor: not-allowed;
         }
+        .drop-zone {
+            border: 2px dashed #007BFF;
+            border-radius: 5px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .drop-zone.dragging {
+            background-color: #f0f8ff;
+        }
     </style>
 </head>
 <body>
@@ -39,8 +49,11 @@
         The original version is published at <a href='https://angrave.github.io/CaptionToTranscription/'>angrave.github.io/CaptionToTranscription</a> without advertising and caption text is processed within your browser. </p>
     
     <form aria-labelledby="form-description">
-        <p id="form-description">Paste or type your VTT or SRT file content into the input box below. The transcription paragraphs will appear in the output area.</p>
+        <p id="form-description">Paste or type your VTT or SRT file content, or drag and drop a file below.</p>
         
+        <div id="drop-zone" class="drop-zone" aria-label="File drop zone" tabindex="0">
+            Drag and drop your VTT or SRT file here, or click to select.
+        </div>
         <label for="input-box">Input Box (VTT/SRT content)</label>
         <textarea id="input-box" aria-describedby="input-box-help" placeholder="Paste your VTT or SRT file content here"></textarea>
         <p id="input-box-help">Ensure you have pasted valid VTT or SRT content.</p>
@@ -57,7 +70,53 @@
         const inputBox = document.getElementById('input-box');
         const outputArea = document.getElementById('output-area');
         const copyButton = document.getElementById('copy-button');
+        const dropZone = document.getElementById('drop-zone');
 
+        // Drag-and-drop functionality
+        dropZone.addEventListener('dragover', (event) => {
+            event.preventDefault();
+            dropZone.classList.add('dragging');
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('dragging');
+        });
+
+        dropZone.addEventListener('drop', (event) => {
+            event.preventDefault();
+            dropZone.classList.remove('dragging');
+
+            const file = event.dataTransfer.files[0];
+            if (file && (file.type === 'text/vtt' || file.type === 'application/x-subrip' || file.name.endsWith('.vtt') || file.name.endsWith('.srt'))) {
+                const reader = new FileReader();
+                reader.onload = () => {
+                    inputBox.value = reader.result;
+                    processInput();
+                };
+                reader.readAsText(file);
+            } else {
+                alert('Please drop a valid VTT or SRT file.');
+            }
+        });
+
+        // Allow click to select file
+        dropZone.addEventListener('click', () => {
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.accept = '.vtt,.srt';
+            fileInput.addEventListener('change', (event) => {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = () => {
+                        inputBox.value = reader.result;
+                        processInput();
+                    };
+                    reader.readAsText(file);
+                }
+            });
+            fileInput.click();
+        });
         inputBox.addEventListener('input', () => {
             const transcription = extractTranscription(inputBox.value);
             outputArea.innerText = transcription;
