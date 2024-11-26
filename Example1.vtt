@@ -1,0 +1,51 @@
+WEBVTT
+
+NOTE This is a sample WebVTT file for testing purposes.
+
+1
+00:00:00.000 --> 00:00:03.500
+<v Speaker1>Welcome to our presentation! Today, we’ll discuss <i>technology</i> trends in 2024.</v>
+
+2
+00:00:03.600 --> 00:00:07.000
+<v Speaker2>That’s right. Let’s start with a quick overview of AI & ML <b>innovations</b>.</v>
+
+3
+00:00:07.100 --> 00:00:10.000
+<v Speaker1>Before we dive in, here’s a fun fact: 42 &mdash; the answer to life, the universe, and everything!</v>
+
+4
+00:00:10.100 --> 00:00:14.500
+<v Speaker2>Haha, true! Okay, moving on, we’ll also explore sustainability &amp; clean energy.</v>
+
+5
+00:00:15.000 --> 00:00:18.000
+<v Speaker3 class="guest">Hello, everyone! I’m a guest speaker here to talk about blockchain.</v>
+
+6
+00:00:18.100 --> 00:00:22.000
+<v Speaker1>Thanks, <u>Speaker3</u>. Blockchain has been quite transformative!</v>
+
+7
+00:00:22.100 --> 00:00:26.000
+<v Speaker3 class="guest">Yes, it’s revolutionizing industries from <i>finance</i> to <b>supply chains</b>.</v>
+
+8
+00:00:26.500 --> 00:00:30.000
+<v Speaker2>Let’s take some questions from the audience. Type them in the chat below!</v>
+
+9
+00:00:30.500 --> 00:00:34.000
+<v Speaker1>While we wait, here’s a summary of key points:</v>
+
+10
+00:00:34.100 --> 00:00:38.000
+<v Speaker1>- AI & ML are advancing rapidly.</v>
+<v Speaker1>- Sustainability is critical for our future.</v>
+<v Speaker1>- Blockchain is reshaping industries.</v>
+
+11
+00:00:38.500 --> 00:00:42.000
+<v Speaker2>Thanks for joining us today! Don’t forget to visit our website for more info: <a href="http://example.com">example.com</a></v>
+
+NOTE End of sample file.
