@@ -64,6 +64,7 @@ See https://github.com/angrave/CaptionToTranscription/blob/main/LICENSE for lice
     </form>
    <div>
        <label for="output-area">Transcription:</label>
+        <button id="download-button" type="button" aria-disabled="true" disabled>Download transcription</button>
         <button id="copy-button" type="button" aria-disabled="true" disabled>Copy transcription to clipboard</button>
         <output id="output-area" aria-live="polite"></output>
     </div>
@@ -75,6 +76,7 @@ See https://github.com/angrave/CaptionToTranscription/blob/main/LICENSE for lice
         const inputBox = document.getElementById('input-box');
         const outputArea = document.getElementById('output-area');
         const copyButton = document.getElementById('copy-button');
+        const downloadButton = document.getElementById('download-button');
         const dropZone = document.getElementById('drop-zone');
 
         // Drag-and-drop functionality
@@ -123,12 +125,27 @@ See https://github.com/angrave/CaptionToTranscription/blob/main/LICENSE for lice
             fileInput.click();
         });
         inputBox.addEventListener('input', processInput);
+        downloadButton.addEventListener('click', downloadOuput) ;
+
+        function downloadOuput() {
+            const text = outputArea.innerText;
+            const blob = new Blob([text], { type: 'text/plain' });
+            const link = document.createElement('a');
+            link.download = 'transcription.txt';
+            link.href = window.URL.createObjectURL(blob);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+       };
 
         function processInput() {
             const transcription = extractTranscription(inputBox.value);
             outputArea.innerText = transcription;
-            copyButton.disabled = !transcription.trim();
+            const hasContent = !transcription.trim();
+            downloadButton.disabled = hasContent;
+            copyButton.disabled = hasContent;
             copyButton.setAttribute('aria-disabled', copyButton.disabled.toString());
+            downloadButton.setAttribute('aria-disabled', downloadButton.disabled.toString());
         }
         
         copyButton.addEventListener('click', () => {
