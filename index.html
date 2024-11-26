@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<!-- 
+   Copyright 2024 Lawrence Angrave
+   Licensed under the Apache License, Version 2.0 (the "License").
+See https://github.com/angrave/CaptionToTranscription/blob/main/LICENSE for license and warranty information.
+-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -45,9 +50,9 @@
 <body>
     <h1>Convert VTT/SRT caption to transcription</h1>
     <noscript><p>This tool requires JavaScript to function.</p></noscript>
-    <p>This tool converts the content of vtt and srt caption files into a readable transcription. 
+    <p>This tool translates the content of vtt and srt caption files into a readable transcription. 
         The original version is published at <a href='https://angrave.github.io/CaptionToTranscription/'>angrave.github.io/CaptionToTranscription</a> without advertising and caption text is processed within your browser. </p>
-    
+    <p>There is no warranty or claim that the output is complete or correct. For example, text may be excluded if it matches speaker or other caption file format. Treat the output as a draft. If perfect translation is required then perform an additional manual review and editing for correctness and completeness.</p>
     <form aria-labelledby="form-description">
         <p id="form-description">Drag and drop a file below or paste the content</p>
         
@@ -64,7 +69,7 @@
     </div>
    
    <br>
-    <p>Source code and license information is available at <a href='https://github.com/angrave/CaptionToTranscription/'>github.com/angrave/CaptionToTranscription</a> </p>
+    <p>Source code, warranty, and license information is available at <a href='https://github.com/angrave/CaptionToTranscription/'>github.com/angrave/CaptionToTranscription</a> </p>
 
     <script>
         const inputBox = document.getElementById('input-box');
@@ -204,6 +209,7 @@ function extractTranscription(content) {
     // Join paragraphs with double line breaks
     return paragraphs.join('\n\n');
 }
+        processInput();
     </script>
 </body>
 </html>
